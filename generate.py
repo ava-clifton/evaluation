@@ -37,7 +37,13 @@ datetime_string = datetime.now().strftime("%Y_%m_%d__%H_%M_%S")
 
 hostname = settings["hostname"]
 
-run_directory = pwd + "/runs/" + hostname + "___" + optional_name_start + datetime_string
+use_one_in = settings["use_one_in"]
+
+run_directory = pwd + "/runs/" + hostname + "___" + optional_name_start + benchmarks_relative_directory.split("/")[-1] + "___" + datetime_string
+
+if use_one_in != 1:
+    run_directory += "___use_one_in_" + str(use_one_in)
+
 logs_directory = run_directory + "/logs"
 scripts_directory = run_directory + "/scripts"
 
@@ -63,12 +69,19 @@ if hostname == "gadi":
     
         if mpi_parallel:
             with open(benchmarks_absolute_directory + "/pddls_names") as pddls_names:
+                line_number = 0 
                 unique_number = 0
                 for line in pddls_names.readlines():
+                    line_number += 1
+                    if line_number%use_one_in != 0:
+                        continue
+
+                    unique_number+=1
+
                     if unique_number%10 == 0:
                         print("made", unique_number, "scripts")
+
                     # for each of these, create a pbs run script 
-                    unique_number+=1
                     unique_number_string = trail_str(unique_number)
                     relative_domain_pddl, relative_problem_pddl, domain_name, problem_name = line.rstrip().split(" ")
 
