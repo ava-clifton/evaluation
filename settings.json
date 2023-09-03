@@ -1,0 +1,5 @@
+{
+    "hostname" : "gadi",
+    "timeout" : 1800,
+    "parallel-pdr_location" : "set_absolute_path"
+}

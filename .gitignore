@@ -1,0 +1,10 @@
+benchmarks_uncompressed
+tags
+*.om
+*.swp
+*.swo
+**.pyc
+*~
+__pycache__
+notes
+runs
