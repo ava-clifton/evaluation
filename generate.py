@@ -65,6 +65,8 @@ if hostname == "gadi":
             with open(benchmarks_absolute_directory + "/pddls_names") as pddls_names:
                 unique_number = 0
                 for line in pddls_names.readlines():
+                    if unique_number%10 == 0:
+                        print("made", unique_number, "scripts")
                     # for each of these, create a pbs run script 
                     unique_number+=1
                     unique_number_string = trail_str(unique_number)
