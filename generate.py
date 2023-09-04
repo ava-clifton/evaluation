@@ -90,7 +90,7 @@ if hostname == "gadi":
 
                     unique_name = domain_name + "___" + problem_name
                     script_location = scripts_directory + "/script___" + unique_number_string + "___" + unique_name
-                    run_line = "timeout -s2 " + str(settings["timeout"] + 10) + " " + absolute_domain_pddl + " " + absolute_problem_pddl + " " + set_location + " &> " + logs_directory + "/log___" + unique_name
+                    run_line = "timeout -s2 " + str(settings["timeout"] + 10) + " " + solver_location + "/run.sh " + absolute_domain_pddl + " " + absolute_problem_pddl + " " + set_location + " &> " + logs_directory + "/log___" + unique_name
                     os.system("cp gadi_meta " + script_location)
                     with open(script_location, "a") as script:
                         script.write(cd_line + "\n")
