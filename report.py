@@ -73,7 +73,11 @@ for dname, pname in dname_pnames:
     dname_pname_to_time[(dname, pname)] = log_result["total_time"]
 
 # now that we have the raw data, lets present it nicely
-os.mkdir(run_directory + "/reports")
+try:
+    os.mkdir(run_directory + "/reports")
+except:
+    pass
+
 with open(run_directory + "/reports/times.csv", "w") as times_csv:
     for dname, pname in sorted(dname_pname_to_time.keys()):
         times_csv.write(dname + ", " + pname + ", " + str(dnam_pname_to_time) + "\n")
