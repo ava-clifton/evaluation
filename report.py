@@ -25,7 +25,7 @@ def get_script_result(dname, pname):
     # process output file
     with open(run_directory + "/scripts/" + dname_pname_to_script_output_file[(dname, pname)]) as f:
         lines = [x.rstrip() for x in f.readlines()]
-        extra_lines = lines[X:]
+        extra_lines = lines[13:]
         if len(extra_lines):
             print("extra lines on: " + run_directory + "/scripts/" + dname_pname_to_script_output_file[(dname, pname)])
         
@@ -50,19 +50,19 @@ dname_pnames = set()
 
 # first find all the scripts and their output files
 for filename in os.listdir(run_directory + "/scripts"):
-    _, _, dname, pname = filename.split(".")[0]
+    _, _, dname, pname = filename.split(".")[0].split("___")
     dp = (dname, pname)
     dname_pnames.add(dp)
 
     if ".e" in filename:
         assert dp not in dname_pname_to_script_error_file.keys()
-        dname_pname_to_script_error_file[dp] = f
+        dname_pname_to_script_error_file[dp] = filename
     elif ".o" in filename:
         assert dp not in dname_pname_to_script_output_file.keys()
-        dname_pname_to_script_output_file[dp] = f
+        dname_pname_to_script_output_file[dp] = filename
     else:
         assert dp not in dname_pname_to_script_file.keys()
-        dname_pname_to_script_file[dp] = f
+        dname_pname_to_script_file[dp] = filename
 
 # Then for everything that should have run, work out what happened
 dname_pname_to_time = {}
