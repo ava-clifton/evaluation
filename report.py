@@ -80,4 +80,4 @@ except:
 
 with open(run_directory + "/reports/times.csv", "w") as times_csv:
     for dname, pname in sorted(dname_pname_to_time.keys()):
-        times_csv.write(dname + ", " + pname + ", " + str(dname_pname_to_time[(dname, pname)) + "\n")
+        times_csv.write(dname + ", " + pname + ", " + str(dname_pname_to_time[(dname, pname)]) + "\n")
