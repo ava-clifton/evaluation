@@ -50,7 +50,7 @@ dname_pnames = set()
 
 # first find all the scripts and their output files
 for filename in os.listdir(run_directory + "/scripts"):
-    _, _, dname, pname = script_file.split(".")[0]
+    _, _, dname, pname = filename.split(".")[0]
     dp = (dname, pname)
     dname_pnames.add(dp)
 
