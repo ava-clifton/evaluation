@@ -42,6 +42,7 @@ def get_log_result(dname, pname):
             if "real " in line:
                 assert "total_time" not in result
                 result["total_time"] = float(line[5:])
+    return result
 
 dname_pname_to_script_error_file = {}
 dname_pname_to_script_output_file = {}
@@ -69,10 +70,10 @@ dname_pname_to_time = {}
 for dname, pname in dname_pnames:
     script_result = get_script_result(dname, pname)
     log_result = get_log_result(dname, pname)
+    dname_pname_to_time[(dname, pname)] = log_result["total_time"]
 
 # now that we have the raw data, lets present it nicely
 os.mkdir(run_directory + "/reports")
-with open(run_directory + "/reports/times.csv") as times_csv:
+with open(run_directory + "/reports/times.csv", "w") as times_csv:
     for dname, pname in sorted(dname_pname_to_time.keys()):
         times_csv.write(dname + ", " + pname + ", " + str(dnam_pname_to_time) + "\n")
-
